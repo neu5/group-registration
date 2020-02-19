@@ -1,4 +1,5 @@
 # group-registration
+Group registration form build using ReactJS on front-end and PHP with MySQL on back-end
 
 ## Prerequisites
 * PHP >= 7.3
@@ -7,13 +8,26 @@
 ## Architecture
 
 ## Local Development
-To run front end app locally go into /form directory and run
-```yarn dev```
+### Front-end
+1. While being in /form directory install dependencies by running
+```
+yarn
+```
+2. Run locall server (it's using parcel.js dev server)
+```
+yarn dev
+```
+Front-end app will be available on 
+```
+localhost:1234
+```
 
-Front end app will be available on 
-```localhost:1234```
-
-To run back end app locally go into /api/public directory and run
-```php -S localhost:8888```
+### Back-end
+1. While being in /api directory run
+```
+php -S localhost:8888
+```
 Backend app will be available on
-```localhost:8888```
+```
+localhost:8888
+```
