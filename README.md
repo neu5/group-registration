@@ -2,18 +2,21 @@
 Group registration form build using ReactJS on front-end and PHP with MySQL on back-end
 
 ## Prerequisites
-* PHP >= 7.3
+### Front-end
 * NodeJS >= 12.15.0
+* npm or yarn
 
-## Architecture
+### Back-end
+* PHP >= 7.3
+* Composer
 
 ## Local Development
 ### Front-end
-1. While being in /form directory install dependencies by running
+1. While being in **/form** directory install dependencies by running
 ```
 yarn
 ```
-2. Run locall server (it's using parcel.js dev server)
+2. Run local server (it's using parcel.js dev server)
 ```
 yarn dev
 ```
@@ -23,7 +26,14 @@ localhost:1234
 ```
 
 ### Back-end
-1. While being in /api directory run
+1. You need to have Composer configured locally in **/api** directory so then you have ```composer.phar``` file in the **/api** directory
+Now you can run
+```
+php composer.phar install
+```
+to install the dependencies
+
+2. While being in **/api** directory run
 ```
 php -S localhost:8888
 ```
