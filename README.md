@@ -26,18 +26,18 @@ localhost:1234
 ```
 
 ### Back-end
-1. You need to have Composer configured locally in **/api** directory so then you have ```composer.phar``` file in the **/api** directory
-Now you can run
+1. You need to have Composer configured locally in **/api** directory so then you have ```composer.phar``` file there
+
+While still being in **/api** directory install dependencies by running
 ```
 php composer.phar install
 ```
-to install the dependencies
 
-2. While being in **/api** directory run
+2. To start local server go into **/api/public** directory and run
 ```
 php -S localhost:8888
 ```
-Backend app will be available on
+Back-end app will be available on
 ```
 localhost:8888
 ```
