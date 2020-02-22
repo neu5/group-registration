@@ -1,9 +1,10 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-const element = <h1>Group form</h1>;
+import App from './components/Form';
+import 'semantic-ui-css/semantic.min.css';
 
 ReactDOM.render(
-  element,
+  <App />,
   document.getElementById('root')
 );
