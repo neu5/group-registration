@@ -20,6 +20,7 @@
   },
   "scripts": {
     "dev": "parcel public/index.html",
+    "prebuild": "rm -Rf dist/**",
     "build": "parcel build public/index.html"
   }
 }
