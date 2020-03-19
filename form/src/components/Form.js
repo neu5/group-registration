@@ -97,10 +97,33 @@ class App extends Component {
     [CHECKBOX_STATES.isPTTK]: false,
     [CHECKBOX_STATES.isTShirt]: false,
     [CHECKBOX_STATES.isTransport]: false,
-    [CHECKBOX_STATES.isRegulationsAccepted]: false
+    [CHECKBOX_STATES.isRegulationsAccepted]: false,
+    id: 0,
+    users: [{ id: 0, name: '' }]
   };
 
   toggle = (prop) => this.setState((prevState) => ({ [prop]: !prevState[prop] }));
+
+  addMember = ()  => {
+    this.setState((state) => ({
+      id: state.id + 1,
+      users: [...state.users, { id: state.id + 1, name: '' }]
+    }));
+  }
+
+  removeMember = id => {
+    if (this.state.users.length === 1) return;
+
+    this.setState((state) => ({
+      users: state.users.filter(user => user.id !== id)
+    }));
+  }
+
+  setName = (id, value) => {
+    this.setState((state) => ({
+      users: state.users.map(user => user.id === id ? { ...user, name: value} : user)
+    }));
+  }
 
   render() {
     return (
@@ -162,68 +185,92 @@ class App extends Component {
             />
             <Segment>
               <Header as='h1'>
-                Uczestnicy
+                Uczestnicy ({this.state.users.length})
               </Header>
-              <Button positive>Dodaj uczestnika +</Button>
-              <Form.Input
-                label='Imię i nazwisko'
-                placeholder='Imię i nazwisko'
-              />
-              <Form.Input
-                label='Data urodzenia'
-                placeholder='Data urodzenia'
-              />
-              <Form.Checkbox
-                label='Czy jest członkiem PTTK?'
-                onChange={() => {this.toggle(CHECKBOX_STATES.isPTTK)}}
-                checked={this.state[CHECKBOX_STATES.isPTTK]}
-              />
-              {this.state.isPTTK && (
-                <Form.Input
-                  label='Nr legitymacji PTTK'
-                  placeholder='Nr legitymacji PTTK'
-                />
-              )}
-              <Form.Checkbox
-                label='Koszulka?'
-                onChange={() => {this.toggle(CHECKBOX_STATES.isTShirt)}}
-                checked={this.state[CHECKBOX_STATES.isTShirt]}
-              />
-              {this.state.isTShirt && (
-                <>
-                  <Form.Dropdown
-                    placeholder='Rodzaj'
-                    selection
-                    options={tShirtKind}
+              <Button 
+                  positive 
+                  onClick={this.addMember}
+                >
+                  Dodaj uczestnika ({this.state.users.length})
+                </Button>
+              {this.state.users.map((user, id) => (
+                <Segment key={id} className='user'>
+                  <Form.Input
+                    label='Imię i nazwisko'
+                    placeholder='Imię i nazwisko'
+                    value={user.name}
+                    onChange={(ev) => {
+                      this.setName(user.id, ev.target.value);
+                    }}
                   />
-                  <Form.Dropdown
-                    placeholder='Rozmiar'
-                    selection
-                    options={tShirtsSizes}
+                  <Form.Input
+                    label='Data urodzenia'
+                    placeholder='Data urodzenia'
                   />
-                </>
-              )}
-              <Form.Checkbox
-                label='Transport?'
-                onChange={() => {this.toggle(CHECKBOX_STATES.isTransport)}}
-                checked={this.state[CHECKBOX_STATES.isTransport]}
-              />
-              {this.state.isTransport && (
-                <>
-                  <Form.Dropdown
-                    placeholder='Cel'
-                    selection
-                    options={destination}
+                  <Form.Checkbox
+                    label='Czy jest członkiem PTTK?'
+                    onChange={() => {this.toggle(CHECKBOX_STATES.isPTTK)}}
+                    checked={this.state[CHECKBOX_STATES.isPTTK]}
                   />
-                  <Form.Dropdown
-                    placeholder='Godzina odjazdu'
-                    selection
-                    options={departureTime}
+                  {this.state.isPTTK && (
+                    <Form.Input
+                      label='Nr legitymacji PTTK'
+                      placeholder='Nr legitymacji PTTK'
+                    />
+                  )}
+                  <Form.Checkbox
+                    label='Koszulka?'
+                    onChange={() => {this.toggle(CHECKBOX_STATES.isTShirt)}}
+                    checked={this.state[CHECKBOX_STATES.isTShirt]}
                   />
-                </>
-              )}
-              <Button negative>Usuń uczestnika -</Button>
-              <Button positive>Dodaj uczestnika +</Button>
+                  {this.state.isTShirt && (
+                    <>
+                      <Form.Dropdown
+                        placeholder='Rodzaj'
+                        selection
+                        options={tShirtKind}
+                      />
+                      <Form.Dropdown
+                        placeholder='Rozmiar'
+                        selection
+                        options={tShirtsSizes}
+                      />
+                    </>
+                  )}
+                  <Form.Checkbox
+                    label='Transport?'
+                    onChange={() => {this.toggle(CHECKBOX_STATES.isTransport)}}
+                    checked={this.state[CHECKBOX_STATES.isTransport]}
+                  />
+                  {this.state.isTransport && (
+                    <>
+                      <Form.Dropdown
+                        placeholder='Cel'
+                        selection
+                        options={destination}
+                      />
+                      <Form.Dropdown
+                        placeholder='Godzina odjazdu'
+                        selection
+                        options={departureTime}
+                      />
+                    </>
+                  )}
+                  <Button 
+                    negative 
+                    floated='right'
+                    onClick={() => this.removeMember(user.id)}
+                  >
+                    Usuń uczestnika {user.name}
+                  </Button>
+                </Segment>
+              ))}
+              <Button
+                positive 
+                onClick={this.addMember}
+              >
+                Dodaj uczestnika ({this.state.users.length})
+              </Button>
             </Segment>
             <Form.TextArea placeholder='Uwagi'></Form.TextArea>
             <Form.Checkbox
