@@ -1,6 +1,6 @@
 # group-registration
 
-Group registration form build using ReactJS on front-end and PHP with MySQL on back-end
+Group registration form build using ReactJS on front-end
 
 ## Prerequisites
 
