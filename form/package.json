@@ -7,6 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "components": "^0.1.0",
+    "formik": "^2.1.4",
     "parcel-bundler": "^1.12.4",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2"
